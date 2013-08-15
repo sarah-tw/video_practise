@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
-<body>
+<body onload="loadJs()">
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="main.js"></script>
     <style type="text/css">
     	#progressBar{
     		width: 672px;
@@ -16,64 +17,6 @@
     		background-color: green;
     	}
     </style>
-    <script type="text/javascript">
-
-    	setInterval(function(){updateProgressiveBar();}, 1000);
-    	function updateProgressiveBar(){    		
-    		var video = document.getElementById("video");
-    		if(video.currentTime==video.duration){
-    			clearInterval(updateProgressiveBar);
-    		}
-    		var width = (video.currentTime*100/video.duration);
-    		var currentProgress = document.getElementById("currentProgress");
-    		currentProgress.style.width = width + "%"
-    	}
-    	
-    	function restart(){
-    		var video = document.getElementById("video");
-    		video.currentTime = 0;
-    	}
-		function videoPlay(){
-			var video = document.getElementById("video");
-			var playButton = document.getElementById("play");
-			console.log(playButton);
-			if(video.paused){
-				video.play();
-				playButton.textContent = ">";
-			}else{
-				video.pause();
-				playButton.textContent = "||"
-
-			}
-		}
-		function skip(value){
-			var video = document.getElementById("video");
-			video.currentTime += value;
-		}
-		function changeVolume(){
-			var volume = document.getElementById("volume");
-			var video = document.getElementById("video");
-
-			video.volume = volume.value/10;
-			console.log(video.volume);
-		}
-
-		function mute(){
-			var video = document.getElementById("video");
-			var mute = document.getElementById("mute");
-			var volume = document.getElementById("volume");
-			if(video.volume == 0){
-				video.volume = 0.3;
-				volume.value = 3;
-				mute.style.textDecoration = "none"
-
-			}else{
-				video.volume = 0;	
-				volume.value = 0;
-				mute.style.textDecoration = "line-through"
-			}
-		}
-    </script>
   </head>
 
 <video id="video">
@@ -85,12 +28,12 @@
 	<div id="progressBar">
 		<div id="currentProgress"></div>
 	</div>
-	<button id="restart" onclick="restart()">Restart</button>
-	<button id="goBackword" onclick="skip(-10)"> << </button>
-	<button id="play" onclick="videoPlay()">||</button>
-	<button id="goForward" onclick="skip(10)"> >> </button>
-	<button id="mute" onclick="mute()">mute</button>
-	<input type="range" id="volume" min="0" max="10" value="3" onchange="changeVolume()" />
+	<button id="restart">Restart</button>
+	<button id="goBackword"> << </button>
+	<button id="play" >||</button>
+	<button id="goForward"> >> </button>
+	<button id="mute">mute</button>
+	<input type="range" id="volume" min="0" max="10" value="3" />
 
     
 </div>
